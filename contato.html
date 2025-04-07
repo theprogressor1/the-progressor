@@ -44,3 +44,152 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato - The Progressor</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6273/6273061.png" type="image/png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top left, #003c2e, #000);
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 255, 170, 0.2);
+      animation: fadeIn 2s ease;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    .success, .error {
+      margin-top: 15px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .success {
+      color: #00ffcc;
+    }
+
+    .error {
+      color: #ff4444;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Entre em Contato</h1>
+    <form id="contactForm">
+      <input type="text" id="nome" placeholder="Seu nome" required>
+      <input type="email" id="email" placeholder="Seu e-mail" required>
+      <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar Mensagem</button>
+      <p class="success" id="success">Mensagem enviada com sucesso!</p>
+      <p class="error" id="error">Erro ao enviar. Tente novamente.</p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const success = document.getElementById("success");
+    const error = document.getElementById("error");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const mensagem = document.getElementById("mensagem").value;
+
+      const webhookURL = "https://discord.com/api/webhooks/1358930076279902319/yhCNObzj-wbXINLYOjrxxR4NdeyRerm9MVkD6gG3C24z-kT105zhS3FH5gwkHs_JctBM";
+
+      const payload = {
+        content: "**Novo contato recebido!**",
+        embeds: [{
+          title: "📩 Contato via site",
+          color: 65280,
+          fields: [
+            { name: "👤 Nome", value: nome, inline: false },
+            { name: "📧 Email", value: email, inline: false },
+            { name: "💬 Mensagem", value: mensagem, inline: false }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          success.style.display = "block";
+          error.style.display = "none";
+          form.reset();
+        } else {
+          throw new Error("Erro na resposta da Webhook.");
+        }
+      })
+      .catch(err => {
+        success.style.display = "none";
+        error.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
