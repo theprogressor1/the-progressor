@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contato - The Progressor</title>
-  <link rel="icon" href="Gojo pfp.jpg">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6273/6273061.png" type="image/png">
   <style>
     body {
       margin: 0;
@@ -13,240 +13,21 @@
       color: white;
       min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      flex-direction: column;
     }
 
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 255, 170, 0.3);
-      text-align: center;
-      max-width: 600px;
+    .navbar {
       width: 100%;
-      animation: fadeIn 2s ease;
-    }
-
-    .card img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 3px solid #00ffcc;
-      box-shadow: 0 0 20px #00ffcc;
-      margin-bottom: 20px;
-    }
-
-    h2.typing {
-      font-size: 2em;
-      margin: 10px 0;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #00ffcc;
-    }
-
-    .contact-info {
-      margin: 25px 0;
+      background-color: rgba(0, 0, 0, 0.6);
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px 0;
+      box-shadow: 0 0 15px #00ffcc33;
     }
 
-    .contact-link {
-      background: rgba(0, 255, 170, 0.1);
-      border: 1px solid #00ffcc;
-      padding: 10px;
-      border-radius: 8px;
-      color: white;
-      text-decoration: none;
-      transition: 0.2s ease;
-    }
-
-    .contact-link:hover {
-      background: #00ffcc;
-      color: #000;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    input, textarea {
-      margin-bottom: 15px;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #00ffcc;
-      color: #000;
-      font-weight: bold;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #00ffcc;
-    }
-
-    .success, .error {
-      margin-top: 15px;
-      font-weight: bold;
-      display: none;
-    }
-
-    .success {
+    .navbar a {
       color: #00ffcc;
+      text-decoration: none;
     }
-
-    .error {
-      color: #ff4444;
-    }
-
-    .sound-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 999;
-    }
-
-    .sound-icon {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <img src="https://i.pinimg.com/736x/c1/f3/8b/c1f38b12f8a92ca6ad3f3702f0071fca.jpg" alt="Toji">
-    <h2 class="typing" id="title"></h2>
-    <p>Entre em contato comigo</p>
-
-    <div class="contact-info">
-      <a href="https://wa.me/5571983402940" target="_blank" class="contact-link">📱 WhatsApp</a>
-      <a href="https://instagram.com/dxvizin_rlzq" target="_blank" class="contact-link">📷 Instagram</a>
-      <a href="mailto:davi.gmn10@gmail.com" class="contact-link">✉️ Enviar Email</a>
-    </div>
-
-    <form id="contactForm">
-      <input type="text" id="nome" placeholder="Seu nome" required>
-      <input type="email" id="email" placeholder="Seu e-mail" required>
-      <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
-      <button type="submit">Enviar Mensagem</button>
-      <p class="success" id="success">Mensagem enviada com sucesso!</p>
-      <p class="error" id="error">Erro ao enviar. Tente novamente.</p>
-    </form>
-  </div>
-
-  <!-- Botão de som -->
-  <button class="sound-control" id="soundBtn">
-    <img id="soundIcon" class="sound-icon" src="https://cdn-icons-png.flaticon.com/512/0/375.png" alt="Som ligado">
-  </button>
-
-  <!-- Música de fundo -->
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="Bleach - Ichigo Crying Emotional Sad ᴴᴰ [ Rain + Never Meant to Belong ].mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Animação de digitação -->
-  <script>
-    const title = document.getElementById('title');
-    const text = "The Progressor";
-    let idx = 0;
-
-    function typeEffect() {
-      if (idx < text.length) {
-        title.innerHTML += text.charAt(idx);
-        idx++;
-        setTimeout(typeEffect, 100);
-      }
-    }
-    window.onload = typeEffect;
-  </script>
-
-  <!-- Script do formulário + botão de som -->
-  <script>
-    const form = document.getElementById("contactForm");
-    const success = document.getElementById("success");
-    const error = document.getElementById("error");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const nome = document.getElementById("nome").value;
-      const email = document.getElementById("email").value;
-      const mensagem = document.getElementById("mensagem").value;
-
-      const webhookURL = "https://discord.com/api/webhooks/1358930076279902319/yhCNObzj-wbXINLYOjrxxR4NdeyRerm9MVkD6gG3C24z-kT105zhS3FH5gwkHs_JctBM";
-
-      const payload = {
-        content: "**Novo contato recebido!**",
-        embeds: [{
-          title: "📩 Contato via site",
-          color: 65280,
-          fields: [
-            { name: "👤 Nome", value: nome, inline: false },
-            { name: "📧 Email", value: email, inline: false },
-            { name: "💬 Mensagem", value: mensagem, inline: false }
-          ],
-          timestamp: new Date().toISOString()
-        }]
-      };
-
-      fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (response.ok) {
-          success.style.display = "block";
-          error.style.display = "none";
-          form.reset();
-        } else {
-          throw new Error("Erro na resposta da Webhook.");
-        }
-      })
-      .catch(() => {
-        success.style.display = "none";
-        error.style.display = "block";
-      });
-    });
-
-    const audio = document.getElementById("backgroundMusic");
-    const soundBtn = document.getElementById("soundBtn");
-    const soundIcon = document.getElementById("soundIcon");
-
-    let isPlaying = true;
-
-    soundBtn.addEventListener("click", () => {
-      if (isPlaying) {
-        audio.pause();
-        soundIcon.src = "https://cdn-icons-png.flaticon.com/512/727/727240.png";
-      } else {
-        audio.play();
-        soundIcon.src = "https://cdn-icons-png.flaticon.com/512/0/375.png";
-      }
-      isPlaying = !isPlaying;
-    });
-  </script>
-</body>
-</html>
