@@ -4,79 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contato - The Progressor</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-  <div class="card animate">
-    <img src="https://i.pinimg.com/736x/c1/f3/8b/c1f38b12f8a92ca6ad3f3702f0071fca.jpg" alt="Toji">
-    
-    <h2 class="typing" id="title"></h2>
-    <p>Entre em contato comigo</p>
-
-    <div class="contact-info">
-      <a href="https://wa.me/5571983402940" target="_blank" class="contact-link">📱 WhatsApp</a>
-      <a href="https://instagram.com/dxvizin_rlzq" target="_blank" class="contact-link">📷 Instagram</a>
-      <a href="https://mail.google.com/mail/u/0/?fs=1&to=davi.gmn10@gmail.com&su=Contato&body=Ol%C3%A1,+quero+falar+com+voc%C3%AA!&tf=cm" 
-         target="_blank" class="contact-link">✉️ Enviar Email</a>
-    </div>
-  </div>
-
-  <!-- Música de fundo -->
-  <audio autoplay loop hidden>
-    <source src="Bleach - Ichigo Crying Emotional Sad ᴴᴰ [ Rain + Never Meant to Belong ].mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Script de digitação -->
-  <script>
-    const title = document.getElementById('title');
-    const text = "The Progressor";
-    let idx = 0;
-
-    function typeEffect() {
-      if (idx < text.length) {
-        title.innerHTML += text.charAt(idx);
-        idx++;
-        setTimeout(typeEffect, 100);
-      }
-    }
-
-    window.onload = typeEffect;
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contato - The Progressor</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6273/6273061.png" type="image/png">
+  <link rel="icon" href="Gojo pfp.jpg">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle at top left, #003c2e, #000);
       color: white;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 40px 20px;
+      flex-direction: column;
     }
 
-    .container {
-      text-align: center;
-      padding: 40px;
+    .card {
       background: rgba(0, 0, 0, 0.6);
+      padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 255, 170, 0.2);
-      animation: fadeIn 2s ease;
-      max-width: 500px;
+      box-shadow: 0 0 25px rgba(0, 255, 170, 0.3);
+      text-align: center;
+      max-width: 600px;
       width: 100%;
+      animation: fadeIn 2s ease;
     }
 
-    h1 {
-      font-size: 2em;
+    .card img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
       margin-bottom: 20px;
+    }
+
+    h2.typing {
+      font-size: 2em;
+      margin: 10px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #00ffcc;
+    }
+
+    .contact-info {
+      margin: 25px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-link {
+      background: rgba(0, 255, 170, 0.1);
+      border: 1px solid #00ffcc;
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .contact-link:hover {
+      background: #00ffcc;
+      color: #000;
     }
 
     form {
@@ -122,6 +112,22 @@
       color: #ff4444;
     }
 
+    .sound-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .sound-icon {
+      width: 40px;
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -129,8 +135,17 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Entre em Contato</h1>
+  <div class="card">
+    <img src="https://i.pinimg.com/736x/c1/f3/8b/c1f38b12f8a92ca6ad3f3702f0071fca.jpg" alt="Toji">
+    <h2 class="typing" id="title"></h2>
+    <p>Entre em contato comigo</p>
+
+    <div class="contact-info">
+      <a href="https://wa.me/5571983402940" target="_blank" class="contact-link">📱 WhatsApp</a>
+      <a href="https://instagram.com/dxvizin_rlzq" target="_blank" class="contact-link">📷 Instagram</a>
+      <a href="mailto:davi.gmn10@gmail.com" class="contact-link">✉️ Enviar Email</a>
+    </div>
+
     <form id="contactForm">
       <input type="text" id="nome" placeholder="Seu nome" required>
       <input type="email" id="email" placeholder="Seu e-mail" required>
@@ -141,6 +156,33 @@
     </form>
   </div>
 
+  <!-- Botão de som -->
+  <button class="sound-control" id="soundBtn">
+    <img id="soundIcon" class="sound-icon" src="https://cdn-icons-png.flaticon.com/512/0/375.png" alt="Som ligado">
+  </button>
+
+  <!-- Música de fundo -->
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="Bleach - Ichigo Crying Emotional Sad ᴴᴰ [ Rain + Never Meant to Belong ].mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Animação de digitação -->
+  <script>
+    const title = document.getElementById('title');
+    const text = "The Progressor";
+    let idx = 0;
+
+    function typeEffect() {
+      if (idx < text.length) {
+        title.innerHTML += text.charAt(idx);
+        idx++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+    window.onload = typeEffect;
+  </script>
+
+  <!-- Script do formulário + botão de som -->
   <script>
     const form = document.getElementById("contactForm");
     const success = document.getElementById("success");
@@ -171,9 +213,7 @@
 
       fetch(webhookURL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       })
       .then(response => {
@@ -185,10 +225,27 @@
           throw new Error("Erro na resposta da Webhook.");
         }
       })
-      .catch(err => {
+      .catch(() => {
         success.style.display = "none";
         error.style.display = "block";
       });
+    });
+
+    const audio = document.getElementById("backgroundMusic");
+    const soundBtn = document.getElementById("soundBtn");
+    const soundIcon = document.getElementById("soundIcon");
+
+    let isPlaying = true;
+
+    soundBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        audio.pause();
+        soundIcon.src = "https://cdn-icons-png.flaticon.com/512/727/727240.png";
+      } else {
+        audio.play();
+        soundIcon.src = "https://cdn-icons-png.flaticon.com/512/0/375.png";
+      }
+      isPlaying = !isPlaying;
     });
   </script>
 </body>
