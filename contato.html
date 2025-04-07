@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato - The Progressor</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="card animate">
+    <img src="https://i.pinimg.com/736x/c1/f3/8b/c1f38b12f8a92ca6ad3f3702f0071fca.jpg" alt="Toji">
+    
+    <h2 class="typing" id="title"></h2>
+    <p>Entre em contato comigo</p>
+
+    <div class="contact-info">
+      <a href="https://wa.me/5571983402940" target="_blank" class="contact-link">📱 WhatsApp</a>
+      <a href="https://instagram.com/dxvizin_rlzq" target="_blank" class="contact-link">📷 Instagram</a>
+      <a href="https://mail.google.com/mail/u/0/?fs=1&to=davi.gmn10@gmail.com&su=Contato&body=Ol%C3%A1,+quero+falar+com+voc%C3%AA!&tf=cm" 
+         target="_blank" class="contact-link">✉️ Enviar Email</a>
+    </div>
+  </div>
+
+  <!-- Música de fundo -->
+  <audio autoplay loop hidden>
+    <source src="Bleach - Ichigo Crying Emotional Sad ᴴᴰ [ Rain + Never Meant to Belong ].mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Script de digitação -->
+  <script>
+    const title = document.getElementById('title');
+    const text = "The Progressor";
+    let idx = 0;
+
+    function typeEffect() {
+      if (idx < text.length) {
+        title.innerHTML += text.charAt(idx);
+        idx++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+
+    window.onload = typeEffect;
+  </script>
+</body>
+</html>
