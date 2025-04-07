@@ -6,8 +6,13 @@
   <title>Contato - The Progressor</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6273/6273061.png" type="image/png">
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle at top left, #003c2e, #000);
       color: white;
@@ -15,19 +20,234 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .navbar {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: flex;
       justify-content: center;
-      gap: 40px;
-      padding: 15px 0;
-      box-shadow: 0 0 15px #00ffcc33;
+      padding: 40px 20px;
     }
 
-    .navbar a {
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 255, 170, 0.2);
+      animation: fadeIn 2s ease;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    h2 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+    }
+
+    .contact-info {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-link {
       color: #00ffcc;
       text-decoration: none;
+      font-size: 18px;
+      transition: 0.3s;
     }
+
+    .contact-link:hover {
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    .nav-links {
+      margin-top: 35px;
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -8px;
+      width: 80%;
+      height: 3px;
+      background: #00ffcc;
+      border-radius: 50px;
+      box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: transparent;
+      border: none;
+      font-size: 26px;
+      color: #00ffcc;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      h2 { font-size: 1.8em; }
+      img { width: 120px; height: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <button class="music-btn" onclick="toggleAudio()" id="musicToggle">🎵</button>
+
+  <div class="card">
+    <img src="https://i.pinimg.com/736x/c1/f3/8b/c1f38b12f8a92ca6ad3f3702f0071fca.jpg" alt="Toji">
+    <h2 id="title"></h2>
+    <p>Entre em contato comigo</p>
+
+    <div class="contact-info">
+      <a href="https://wa.me/5571983402940" target="_blank" class="contact-link">📱 WhatsApp</a>
+      <a href="https://instagram.com/dxvizin_rlzq" target="_blank" class="contact-link">📷 Instagram</a>
+      <a href="mailto:davi.gmn10@gmail.com" target="_blank" class="contact-link">✉️ Enviar Email</a>
+    </div>
+
+    <form id="contactForm">
+      <input type="text" id="nome" placeholder="Seu nome" required>
+      <input type="email" id="email" placeholder="Seu e-mail" required>
+      <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar Mensagem</button>
+    </form>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre mim</a>
+    <a href="projetos.html">Meus projetos</a>
+  </div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="Bleach - Ichigo Crying Emotional Sad ᴴᴰ [ Rain + Never Meant to Belong ].mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const title = document.getElementById('title');
+    const text = "The Progressor";
+    let idx = 0;
+
+    function typeEffect() {
+      if (idx < text.length) {
+        title.innerHTML += text.charAt(idx);
+        idx++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+    window.onload = typeEffect;
+
+    const audio = document.getElementById("bg-music");
+    const musicToggle = document.getElementById("musicToggle");
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        musicToggle.textContent = "🎵";
+      } else {
+        audio.pause();
+        musicToggle.textContent = "🔇";
+      }
+    }
+
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const mensagem = document.getElementById("mensagem").value;
+
+      const webhookURL = "https://discord.com/api/webhooks/1358930076279902319/yhCNObzj-wbXINLYOjrxxR4NdeyRerm9MVkD6gG3C24z-kT105zhS3FH5gwkHs_JctBM";
+
+      const payload = {
+        content: "**Novo contato recebido!**",
+        embeds: [{
+          title: "📩 Contato via site",
+          color: 65280,
+          fields: [
+            { name: "👤 Nome", value: nome },
+            { name: "📧 Email", value: email },
+            { name: "💬 Mensagem", value: mensagem }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          form.reset();
+          window.location.href = "index.html";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
